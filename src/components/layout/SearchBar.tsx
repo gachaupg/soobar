@@ -34,7 +34,7 @@ const SearchBar = () => {
         type="submit"
         size="icon" 
         variant="default" 
-        className="absolute right-0 top-0 h-9 w-9 bg-sobaar-darkBlue"
+        className="absolute right-1 top-1 h-7 w-7 bg-sobaar-darkBlue"
       >
         <Search size={18} />
       </Button>

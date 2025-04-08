@@ -4,22 +4,26 @@ import ProductFilter from "@/components/products/ProductFilter";
 import ProductCard from "@/components/products/ProductCard";
 import { Button } from "@/components/ui/button";
 import { categories } from "@/data/dummyData";
-import {
-  fetchProductsByCategory,
-  fetchAllProducts,
-} from "@/services/productService";
+import { fetchProducts, filterProducts } from "@/services/productService";
 import { Product } from "@/data/dummyData";
 import { Sidebar } from "@/components/layout/Sidebar";
 
+interface FilterState {
+  minPrice: number;
+  maxPrice: number;
+  condition: string;
+  location: string;
+}
+
 const ProductList = () => {
-  const { categoryId, subcategory } = useParams();
   const [searchParams] = useSearchParams();
-  const filterParam = searchParams.get("filter");
+  const categoryId = searchParams.get("category");
+  const subcategory = searchParams.get("subcategory");
 
   const [showFilters, setShowFilters] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [appliedFilters, setAppliedFilters] = useState({
+  const [appliedFilters, setAppliedFilters] = useState<FilterState>({
     minPrice: 0,
     maxPrice: 0,
     condition: "",
@@ -37,28 +41,11 @@ const ProductList = () => {
         let fetchedProducts: Product[] = [];
 
         if (categoryId) {
-          // Fetch products for the specific category
-          fetchedProducts = await fetchProductsByCategory(categoryId);
+          // Fetch all products and filter by category name
+          fetchedProducts = await filterProducts(categoryName);
         } else {
           // Fetch all products if no category is specified
-          fetchedProducts = await fetchAllProducts();
-        }
-
-        // Apply additional filters from URL params
-        if (filterParam) {
-          switch (filterParam) {
-            case "new":
-              fetchedProducts = fetchedProducts.filter((p) => p.isNew);
-              break;
-            case "featured":
-              fetchedProducts = fetchedProducts.filter((p) => p.isFeatured);
-              break;
-            case "popular":
-              // For demo purposes, consider all as popular
-              break;
-            default:
-              break;
-          }
+          fetchedProducts = await fetchProducts();
         }
 
         setProducts(fetchedProducts);
@@ -71,9 +58,9 @@ const ProductList = () => {
     };
 
     loadProducts();
-  }, [categoryId, filterParam]);
+  }, [categoryId, categoryName]);
 
-  const handleApplyFilters = (filters: any) => {
+  const handleApplyFilters = (filters: FilterState) => {
     setLoading(true);
     try {
       let filteredProducts = [...products];
@@ -120,7 +107,7 @@ const ProductList = () => {
           <Sidebar className="flex-shrink-0" />
           <main className="flex-1">
             <h1 className="text-3xl font-bold mb-6">
-              {subcategory ? subcategory.split("-").join(" ") : categoryId}
+              {subcategory ? subcategory.split("-").join(" ") : categoryName}
             </h1>
             {loading ? (
               <div className="text-center py-10">
@@ -135,14 +122,14 @@ const ProductList = () => {
                   >
                     <div className="w-full h-48 overflow-hidden">
                       <img
-                        src={product.image}
-                        alt={product.name}
+                        src={product.images[0]}
+                        alt={product.title}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-2">
-                        {product.name}
+                        {product.title}
                       </h3>
                       <p className="text-gray-600 mb-2">
                         {product.description}

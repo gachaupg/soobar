@@ -1,4 +1,3 @@
-
 // Dummy data for the ecommerce system
 
 export interface Product {
@@ -19,6 +18,7 @@ export interface Product {
   isNew: boolean;
   datePosted: string;
   specifications?: Record<string, string | number | boolean>;
+  createdAt: string;
 }
 
 export interface Category {
@@ -65,7 +65,8 @@ export const products: Product[] = [
     category: "Cars",
     subcategory: "Mini",
     location: "Mogadishu",
-    description: "Classic Mini Cooper S in excellent condition. Low mileage, well maintained, and comes with all the original accessories.",
+    description:
+      "Classic Mini Cooper S in excellent condition. Low mileage, well maintained, and comes with all the original accessories.",
     condition: "Used",
     sellerName: "Leeza Alam",
     sellerRating: 5.0,
@@ -80,8 +81,9 @@ export const products: Product[] = [
       fuel: "Petrol",
       transmission: "Automatic",
       color: "Blue",
-      doors: 4
-    }
+      doors: 4,
+    },
+    createdAt: "2023-04-15T12:00:00",
   },
   {
     id: "2",
@@ -91,7 +93,8 @@ export const products: Product[] = [
     category: "Cars",
     subcategory: "Luxury",
     location: "Mogadishu",
-    description: "Porsche Panamera in pristine condition with low mileage. This car has been keeping up with the times and fashion trends in the exotic dream industry! No accident just checked with a CarFax report! This ride maintains its value well over time. The new AER AMAX 90 CD is the iconic athlete shoe from Nike. They are super comfortable to various school levels and formally protect the human feet. This model of sneaker for practicing various sports.",
+    description:
+      "Porsche Panamera in pristine condition with low mileage. This car has been keeping up with the times and fashion trends in the exotic dream industry! No accident just checked with a CarFax report! This ride maintains its value well over time. The new AER AMAX 90 CD is the iconic athlete shoe from Nike. They are super comfortable to various school levels and formally protect the human feet. This model of sneaker for practicing various sports.",
     condition: "New",
     sellerName: "Leeza Alam",
     sellerRating: 5.0,
@@ -106,8 +109,9 @@ export const products: Product[] = [
       fuel: "Hybrid",
       transmission: "Automatic",
       color: "White",
-      doors: 4
-    }
+      doors: 4,
+    },
+    createdAt: "2023-08-10T12:00:00",
   },
   {
     id: "3",
@@ -117,7 +121,8 @@ export const products: Product[] = [
     category: "Cars",
     subcategory: "Muscle",
     location: "Mogadishu",
-    description: "Ford Mustang GT Premium with low mileage. Powerful V8 engine, premium sound system, and leather interior.",
+    description:
+      "Ford Mustang GT Premium with low mileage. Powerful V8 engine, premium sound system, and leather interior.",
     condition: "Used",
     sellerName: "Ahmed Hassan",
     sellerRating: 4.8,
@@ -132,8 +137,9 @@ export const products: Product[] = [
       fuel: "Petrol",
       transmission: "Manual",
       color: "Yellow",
-      doors: 2
-    }
+      doors: 2,
+    },
+    createdAt: "2023-07-22T12:00:00",
   },
   {
     id: "4",
@@ -143,7 +149,8 @@ export const products: Product[] = [
     category: "Electronics",
     subcategory: "Laptops",
     location: "Mogadishu",
-    description: "Apple MacBook Pro with M1 Pro chip, 16GB RAM, and 512GB SSD. Like new condition with warranty remaining.",
+    description:
+      "Apple MacBook Pro with M1 Pro chip, 16GB RAM, and 512GB SSD. Like new condition with warranty remaining.",
     condition: "Used",
     sellerName: "Farah Omar",
     sellerRating: 4.9,
@@ -157,8 +164,9 @@ export const products: Product[] = [
       ram: "16GB",
       storage: "512GB SSD",
       display: "14-inch Retina",
-      batteryLife: "Up to 17 hours"
-    }
+      batteryLife: "Up to 17 hours",
+    },
+    createdAt: "2023-09-05T12:00:00",
   },
   {
     id: "5",
@@ -168,7 +176,8 @@ export const products: Product[] = [
     category: "Home & Living",
     subcategory: "Furniture",
     location: "Mogadishu",
-    description: "Complete living room set including sofa, coffee table, and two chairs. Modern design with comfortable fabric.",
+    description:
+      "Complete living room set including sofa, coffee table, and two chairs. Modern design with comfortable fabric.",
     condition: "Used",
     sellerName: "Sara Ahmed",
     sellerRating: 4.7,
@@ -181,8 +190,9 @@ export const products: Product[] = [
       material: "Fabric and wood",
       color: "Blue and beige",
       pieces: 4,
-      age: "2 years"
-    }
+      age: "2 years",
+    },
+    createdAt: "2023-06-18T12:00:00",
   },
   {
     id: "6",
@@ -192,7 +202,8 @@ export const products: Product[] = [
     category: "Electronics",
     subcategory: "Audio",
     location: "Mogadishu",
-    description: "Sony WH-1000XM4 noise-cancelling headphones. Great condition with original packaging and accessories.",
+    description:
+      "Sony WH-1000XM4 noise-cancelling headphones. Great condition with original packaging and accessories.",
     condition: "Used",
     sellerName: "Mohamed Ali",
     sellerRating: 4.5,
@@ -205,8 +216,9 @@ export const products: Product[] = [
       type: "Over-ear",
       batteryLife: "30 hours",
       connectivity: "Bluetooth 5.0",
-      noiseCancel: true
-    }
+      noiseCancel: true,
+    },
+    createdAt: "2023-08-30T12:00:00",
   },
   {
     id: "7",
@@ -216,7 +228,8 @@ export const products: Product[] = [
     category: "Mobile Phones",
     subcategory: "Apple",
     location: "Mogadishu",
-    description: "iPhone 14 Pro Max 256GB in perfect condition. Includes original charger, box, and additional case.",
+    description:
+      "iPhone 14 Pro Max 256GB in perfect condition. Includes original charger, box, and additional case.",
     condition: "Used",
     sellerName: "Amina Hussein",
     sellerRating: 4.9,
@@ -229,8 +242,9 @@ export const products: Product[] = [
       storage: "256GB",
       color: "Deep Purple",
       screen: "6.7-inch Super Retina XDR",
-      camera: "48MP triple camera"
-    }
+      camera: "48MP triple camera",
+    },
+    createdAt: "2023-09-10T12:00:00",
   },
   {
     id: "8",
@@ -240,7 +254,8 @@ export const products: Product[] = [
     category: "Real Estate",
     subcategory: "Apartments for Rent",
     location: "Mogadishu",
-    description: "Modern 2-bedroom apartment in the city center. Fully furnished with all utilities included.",
+    description:
+      "Modern 2-bedroom apartment in the city center. Fully furnished with all utilities included.",
     condition: "N/A",
     sellerName: "Real Estate Agency",
     sellerRating: 4.8,
@@ -254,9 +269,10 @@ export const products: Product[] = [
       bathrooms: 1,
       size: "90 sq.m",
       furnished: true,
-      parking: true
-    }
-  }
+      parking: true,
+    },
+    createdAt: "2023-09-15T12:00:00",
+  },
 ];
 
 // Generate more products by duplicating and modifying existing ones
@@ -267,7 +283,12 @@ export const allProducts: Product[] = [
     id: (products.length + index + 1).toString(),
     isNew: index % 3 === 0,
     isFeatured: index % 5 === 0,
-    datePosted: new Date(new Date().setDate(new Date().getDate() - (index * 2))).toISOString().split('T')[0]
+    datePosted: new Date(new Date().setDate(new Date().getDate() - index * 2))
+      .toISOString()
+      .split("T")[0],
+    createdAt: new Date(
+      new Date().setDate(new Date().getDate() - index * 2)
+    ).toISOString(),
   })),
   ...products.map((product, index) => ({
     ...product,
@@ -275,8 +296,15 @@ export const allProducts: Product[] = [
     price: product.price * 0.9,
     isNew: index % 4 === 0,
     isFeatured: index % 6 === 0,
-    datePosted: new Date(new Date().setDate(new Date().getDate() - (index * 3 + 10))).toISOString().split('T')[0]
-  }))
+    datePosted: new Date(
+      new Date().setDate(new Date().getDate() - (index * 3 + 10))
+    )
+      .toISOString()
+      .split("T")[0],
+    createdAt: new Date(
+      new Date().setDate(new Date().getDate() - (index * 3 + 10))
+    ).toISOString(),
+  })),
 ];
 
 // Categories
@@ -291,8 +319,8 @@ export const categories: Category[] = [
       { id: "1-2", name: "Sale: House & Apartments", count: 32456 },
       { id: "1-3", name: "Lands & Plots", count: 5432 },
       { id: "1-4", name: "For Rent: Shops & Offices", count: 2134 },
-      { id: "1-5", name: "For Sale: Shops & Offices", count: 2100 }
-    ]
+      { id: "1-5", name: "For Sale: Shops & Offices", count: 2100 },
+    ],
   },
   {
     id: "2",
@@ -303,8 +331,8 @@ export const categories: Category[] = [
       { id: "2-1", name: "Cars", count: 65432 },
       { id: "2-2", name: "Commercial Vehicles", count: 5432 },
       { id: "2-3", name: "Spare Parts", count: 12345 },
-      { id: "2-4", name: "Other Vehicles", count: 4033 }
-    ]
+      { id: "2-4", name: "Other Vehicles", count: 4033 },
+    ],
   },
   {
     id: "3",
@@ -314,8 +342,8 @@ export const categories: Category[] = [
     subcategories: [
       { id: "3-1", name: "Mobile Phones", count: 54321 },
       { id: "3-2", name: "Accessories", count: 23456 },
-      { id: "3-3", name: "Tablets", count: 9465 }
-    ]
+      { id: "3-3", name: "Tablets", count: 9465 },
+    ],
   },
   {
     id: "4",
@@ -327,8 +355,8 @@ export const categories: Category[] = [
       { id: "4-2", name: "TV, Audio & Video", count: 21345 },
       { id: "4-3", name: "Cameras & Accessories", count: 10234 },
       { id: "4-4", name: "Computer Accessories", count: 14325 },
-      { id: "4-5", name: "Other Electronics", count: 9193 }
-    ]
+      { id: "4-5", name: "Other Electronics", count: 9193 },
+    ],
   },
   {
     id: "5",
@@ -341,21 +369,10 @@ export const categories: Category[] = [
       { id: "5-3", name: "Customer Service", count: 8765 },
       { id: "5-4", name: "Driver", count: 5678 },
       { id: "5-5", name: "Office Admin", count: 4321 },
-      { id: "5-6", name: "Teaching", count: 3456 }
-    ]
+      { id: "5-6", name: "Teaching", count: 3456 },
+    ],
   },
-  {
-    id: "6",
-    name: "Bikes",
-    icon: "bike",
-    count: 87242,
-    subcategories: [
-      { id: "6-1", name: "Motorcycles", count: 12345 },
-      { id: "6-2", name: "Scooters", count: 7654 },
-      { id: "6-3", name: "Bicycles", count: 5432 },
-      { id: "6-4", name: "Spare Parts", count: 6543 }
-    ]
-  },
+ 
   {
     id: "7",
     name: "Services",
@@ -365,8 +382,8 @@ export const categories: Category[] = [
       { id: "7-1", name: "Home Services", count: 5432 },
       { id: "7-2", name: "Electronics & Computer", count: 4321 },
       { id: "7-3", name: "Education & Classes", count: 3214 },
-      { id: "7-4", name: "Drivers & Taxi", count: 2134 }
-    ]
+      { id: "7-4", name: "Drivers & Taxi", count: 2134 },
+    ],
   },
   {
     id: "8",
@@ -376,21 +393,10 @@ export const categories: Category[] = [
     subcategories: [
       { id: "8-1", name: "Men", count: 12345 },
       { id: "8-2", name: "Women", count: 23456 },
-      { id: "8-3", name: "Kids", count: 7890 }
-    ]
+      { id: "8-3", name: "Kids", count: 7890 },
+    ],
   },
-  {
-    id: "9",
-    name: "Announcements",
-    icon: "speaker",
-    count: 87242,
-    subcategories: [
-      { id: "9-1", name: "Community", count: 3456 },
-      { id: "9-2", name: "Events", count: 2345 },
-      { id: "9-3", name: "Lost & Found", count: 1234 },
-      { id: "9-4", name: "Others", count: 987 }
-    ]
-  }
+  
 ];
 
 // Locations
@@ -401,7 +407,7 @@ export const locations: Location[] = [
   { id: "4", name: "Bosaso", count: 43210 },
   { id: "5", name: "Burao", count: 32109 },
   { id: "6", name: "Berbera", count: 21098 },
-  { id: "7", name: "Garoowe", count: 10987 }
+  { id: "7", name: "Garoowe", count: 10987 },
 ];
 
 // Dummy users
@@ -417,7 +423,7 @@ export const users: User[] = [
     rating: 5.0,
     totalReviews: 74,
     memberSince: "Oct 2019",
-    isVerified: true
+    isVerified: true,
   },
   {
     id: "2",
@@ -429,7 +435,7 @@ export const users: User[] = [
     rating: 4.8,
     totalReviews: 65,
     memberSince: "Mar 2020",
-    isVerified: true
+    isVerified: true,
   },
   {
     id: "3",
@@ -442,8 +448,8 @@ export const users: User[] = [
     rating: 4.9,
     totalReviews: 42,
     memberSince: "Jan 2021",
-    isVerified: true
-  }
+    isVerified: true,
+  },
 ];
 
 // Partner logos
@@ -457,5 +463,5 @@ export const partners = [
   { name: "Adidas", logo: "/public/placeholder.svg" },
   { name: "Microsoft", logo: "/public/placeholder.svg" },
   { name: "Amazon", logo: "/public/placeholder.svg" },
-  { name: "Coca-Cola", logo: "/public/placeholder.svg" }
+  { name: "Coca-Cola", logo: "/public/placeholder.svg" },
 ];

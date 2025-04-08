@@ -21,6 +21,7 @@ const transformProduct = (apiProduct: ApiProduct): Product => {
     title: apiProduct.title,
     description: apiProduct.description,
     price: apiProduct.price,
+    currency: "USD",
     category: mapCategory(apiProduct.category),
     condition: "New",
     location: "Mogadishu",
@@ -28,6 +29,10 @@ const transformProduct = (apiProduct: ApiProduct): Product => {
     isNew: true,
     isFeatured: apiProduct.rating.rate > 4,
     createdAt: new Date().toISOString(),
+    datePosted: new Date().toISOString(),
+    sellerName: "Default Seller",
+    sellerRating: 4.5,
+    sellerAvatar: "/public/placeholder.svg",
   };
 };
 
@@ -147,5 +152,45 @@ export const filterProducts = async (
   } catch (error) {
     console.error("Error filtering products:", error);
     return [];
+  }
+};
+
+// Fetch a single product by ID
+export const fetchProductById = async (id: string): Promise<Product> => {
+  try {
+    // Fetch from fake store API
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const apiProduct = (await response.json()) as ApiProduct;
+
+    // Transform the API product to our format
+    return {
+      id: apiProduct.id.toString(),
+      title: apiProduct.title,
+      description: apiProduct.description,
+      price: apiProduct.price,
+      currency: "USD",
+      category: mapCategory(apiProduct.category),
+      condition: "New",
+      location: "Mogadishu",
+      images: [apiProduct.image],
+      isNew: true,
+      isFeatured: apiProduct.rating.rate > 4,
+      createdAt: new Date().toISOString(),
+      datePosted: new Date().toISOString(),
+      sellerName: "Default Seller",
+      sellerRating: apiProduct.rating.rate,
+      sellerAvatar: "/public/placeholder.svg",
+      specifications: {
+        rating: apiProduct.rating.rate,
+        reviews: apiProduct.rating.count,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching product by ID:", error);
+    throw error;
   }
 };

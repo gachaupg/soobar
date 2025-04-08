@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MapPin, Menu, X, ChevronDown } from "lucide-react";
+import { MapPin, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SearchBar from "./SearchBar";
 import {
@@ -8,6 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { categories } from "@/data/dummyData";
@@ -15,11 +18,21 @@ import { categories } from "@/data/dummyData";
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location, setLocation] = useState("All Somalia");
+  const [expandedCategories, setExpandedCategories] = useState<
+    Record<string, boolean>
+  >({});
   const navigate = useNavigate();
 
   const handleCategorySelect = (categoryId: string) => {
     navigate(`/category/${categoryId}`);
     setMobileMenuOpen(false);
+  };
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }));
   };
 
   return (
@@ -135,25 +148,54 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56 bg-white">
                 {categories.map((category) => (
-                  <DropdownMenuItem
-                    key={category.id}
-                    onClick={() => handleCategorySelect(category.id)}
-                  >
-                    {category.name}
-                  </DropdownMenuItem>
+                  <DropdownMenuSub key={category.id}>
+                    <DropdownMenuSubTrigger className="flex items-center justify-between w-full">
+                      <span>{category.name}</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent className="w-48">
+                      {category.subcategories.map((subcategory) => (
+                        <DropdownMenuItem
+                          key={subcategory.id}
+                          onClick={() =>
+                            handleCategorySelect(
+                              `${category.id}/${subcategory.id}`
+                            )
+                          }
+                        >
+                          {subcategory.name}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuSub>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Category links with dropdowns */}
-            <CategoryDropdown name="Real Estate" categoryId="real-estate" />
-            <CategoryDropdown name="Fashion" categoryId="fashion" />
-            <CategoryDropdown name="Cars" categoryId="cars" />
-            <CategoryDropdown name="Bikes & Boats" categoryId="bikes-boats" />
-            <CategoryDropdown name="Mobile" categoryId="mobile-phones" />
-            <CategoryDropdown name="Electronics" categoryId="electronics" />
-            <CategoryDropdown name="Services" categoryId="services" />
-            <CategoryDropdown name="Jobs" categoryId="jobs" />
+            {categories.map((category) => (
+              <DropdownMenu key={category.id}>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="h-full px-3 text-sm font-medium flex items-center text-zinc-800 hover:text-zinc-900 hover:bg-gray-100 whitespace-nowrap"
+                  >
+                    {category.name} <ChevronDown size={14} className="ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-56 bg-white">
+                  {category.subcategories.map((subcategory) => (
+                    <DropdownMenuItem
+                      key={subcategory.id}
+                      onClick={() =>
+                        handleCategorySelect(`${category.id}/${subcategory.id}`)
+                      }
+                    >
+                      {subcategory.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ))}
 
             <Link
               to="/partners"
@@ -201,14 +243,33 @@ const Navbar = () => {
               <div className="font-semibold text-lg">Categories</div>
               <div className="space-y-2">
                 {categories.map((category) => (
-                  <Link
-                    key={category.id}
-                    to={`/category/${category.id}`}
-                    className="block py-2 text-gray-600 hover:text-gray-900 border-b border-gray-100"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
+                  <div key={category.id} className="border-b border-gray-100">
+                    <button
+                      onClick={() => toggleCategory(category.id)}
+                      className="flex items-center justify-between w-full py-2 text-gray-600 hover:text-gray-900"
+                    >
+                      <span>{category.name}</span>
+                      {expandedCategories[category.id] ? (
+                        <ChevronDown className="w-4 h-4" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4" />
+                      )}
+                    </button>
+                    {expandedCategories[category.id] && (
+                      <div className="pl-4 space-y-1 py-2">
+                        {category.subcategories.map((subcategory) => (
+                          <Link
+                            key={subcategory.id}
+                            to={`/category/${category.id}/${subcategory.id}`}
+                            className="block py-1 text-sm text-gray-600 hover:text-gray-900"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {subcategory.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -237,50 +298,6 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-  );
-};
-
-// Helper component for category dropdowns
-const CategoryDropdown = ({
-  name,
-  categoryId,
-}: {
-  name: string;
-  categoryId: string;
-}) => {
-  const navigate = useNavigate();
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="h-full px-2 text-sm font-medium text-zinc-800 hover:text-zinc-900 hover:bg-gray-100 flex items-center whitespace-nowrap"
-        >
-          {name} <ChevronDown size={14} className="ml-1" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white">
-        <DropdownMenuItem onClick={() => navigate(`/category/${categoryId}`)}>
-          All {name}
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate(`/category/${categoryId}?filter=new`)}
-        >
-          New Arrivals
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate(`/category/${categoryId}?filter=featured`)}
-        >
-          Featured
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate(`/category/${categoryId}?filter=popular`)}
-        >
-          Popular
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 };
 

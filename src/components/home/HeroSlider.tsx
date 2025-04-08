@@ -4,23 +4,23 @@ const slides = [
   {
     id: 1,
     image:
-      "https://pictures-kenya.jijistatic.com/74594166_MzAwLTIyNS1mN2Q2YzQyYWQ2.webp",
+      "https://res.cloudinary.com/pitz/image/upload/v1744116697/Rectangle_4181_1_stkjjs.png",
   },
   {
     id: 2,
     image:
-      "https://pictures-kenya.jijistatic.com/74259069_MzAwLTMwMC1jN2NiNWE2NjEy.webp",
+      "https://res.cloudinary.com/pitz/image/upload/v1744116697/Rectangle_4181_2_wgj14c.png",
   },
+
   {
     id: 3,
     image:
-      "https://pictures-kenya.jijistatic.com/69958636_MzAwLTQwMC0zYzQ4ZmYxMTkx.webp",
+      "https://res.cloudinary.com/pitz/image/upload/v1744116697/Rectangle_4181_jozyei.png",
   },
   {
     id: 4,
-    image:
-      "https://pictures-kenya.jijistatic.com/69291856_MzAwLTQwMC01YmVkMTlhYzVl.webp",
-  },
+    image:"https://res.cloudinary.com/pitz/image/upload/v1744116942/Rectangle_4181_3_agkk8o.png"
+  }
 ];
 
 export function HeroSlider() {

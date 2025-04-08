@@ -8,13 +8,15 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Partners } from "@/components/Partners";
 import { HeroSlider } from "@/components/home/HeroSlider";
+import { HowItWorks } from "@/components/HowItWorks";
 
 const categories = [
   {
     id: 1,
     title: "Classic Sports Cars",
     description: "Iconic performance vehicles from the golden age of motoring",
-    image: "https://images.pexels.com/photos/3608542/pexels-photo-3608542.jpeg",
+    image:
+      "https://res.cloudinary.com/pitz/image/upload/v1744116697/Rectangle_4181_jozyei.png",
     count: 45,
   },
   {
@@ -126,7 +128,8 @@ const Index = () => {
             />
           </>
         )}
-
+        {/* How It Works Section */}
+        <HowItWorks />
         {/* Partners Section */}
         <Partners showAllButton={true} />
 

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface SidebarProps {
   className?: string;
@@ -61,6 +63,17 @@ const categories = [
 ];
 
 export function Sidebar({ className }: SidebarProps) {
+  const [expandedCategories, setExpandedCategories] = useState<
+    Record<string, boolean>
+  >({});
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }));
+  };
+
   return (
     <aside className={cn("w-64 bg-white shadow-sm", className)}>
       <div className="p-4">
@@ -69,13 +82,38 @@ export function Sidebar({ className }: SidebarProps) {
           <ul className="space-y-1">
             {categories.map((category) => (
               <li key={category.id}>
-                <Link
-                  to={`/category/${category.id}`}
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-100"
-                >
-                  <span className="text-xl">{category.icon}</span>
-                  <span>{category.name}</span>
-                </Link>
+                <div className="flex flex-col">
+                  <button
+                    onClick={() => toggleCategory(category.id)}
+                    className="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-100"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">{category.icon}</span>
+                      <span>{category.name}</span>
+                    </div>
+                    {expandedCategories[category.id] ? (
+                      <ChevronDown className="w-4 h-4" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4" />
+                    )}
+                  </button>
+                  {expandedCategories[category.id] && (
+                    <ul className="ml-4 mt-1 space-y-1">
+                      {category.subcategories.map((subcategory) => (
+                        <li key={subcategory}>
+                          <Link
+                            to={`/category/${category.id}/${subcategory
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")}`}
+                            className="block px-3 py-2 text-sm text-gray-600 rounded-md hover:bg-gray-100"
+                          >
+                            {subcategory}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
